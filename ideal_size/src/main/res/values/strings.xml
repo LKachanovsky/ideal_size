@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Find_Your_Perfect_Fit">Find Your Perfect Fit</string>
+    <string name="Height_colon">Height:</string>
+    <string name="Weight_colon">Weight:</string>
+    <string name="cm">cm</string>
+    <string name="kg">kg</string>
+    <string name="Get_Size_Recommendation">Get Size Recommendation</string>
+
+    <string name="Your_Recommended_Size_size">Your Recommended Size: %s</string>
+    <string name="Based_on_your_info_message">Based on your info, size %s is recommended.</string>
+    <string name="OK">OK</string>
+</resources>
