@@ -2,25 +2,17 @@ package com.kach.ideal_size
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -34,8 +26,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
-import java.lang.Math.pow
-import kotlin.math.abs
 
 @Composable
 fun IdealSizeDialog(
@@ -141,14 +131,9 @@ fun Input(
 
         Button(
             onClick = {
-                if (height.isBlank() || height.isNotFloatNumber()) return@Button
-                if (weight.isBlank() || weight.isNotFloatNumber()) return@Button
-
-                if (height.toFloat() <= 0f) return@Button
-                if (weight.toFloat() <= 0f) return@Button
-
-                val result = calculateSizeRecommendation(height.toFloat(), weight.toFloat())
-                onGetSizeRecommendationClicked.invoke(result)
+                processSizeRecommendation(height, weight)?.let { size ->
+                    onGetSizeRecommendationClicked.invoke(size)
+                }
             },
             modifier = Modifier
                 .padding(top = 24.dp)
@@ -194,16 +179,6 @@ fun Output(
                 text = stringResource(R.string.OK)
             )
         }
-    }
-}
-
-fun calculateSizeRecommendation(height: Float, weight: Float): Size {
-    val heightM2 = (height / 100) * (height / 100)
-    return when (weight / heightM2) {
-        in 0f..<18.5f -> Size.S
-        in 18.5f..<25f -> Size.M
-        in 25f..<30f -> Size.L
-        else -> Size.XL
     }
 }
 

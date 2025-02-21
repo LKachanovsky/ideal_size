@@ -48,11 +48,7 @@ dependencies {
     implementation(libs.androidx.material3)
 
     testImplementation(libs.junit)
-
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
+    testImplementation(libs.junit.junit)
 
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
@@ -67,6 +63,17 @@ publishing {
 
             afterEvaluate {
                 from(components["release"])
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/LKachanovsky/ideal-size")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR") ?: "GITHUB_ACTOR"
+                password = System.getenv("GITHUB_TOKEN") ?: "GITHUB_TOKEN"
             }
         }
     }
