@@ -72,8 +72,8 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/LKachanovsky/ideal-size")
             credentials {
-                username = System.getenv("GITHUB_ACTOR") ?: "GITHUB_ACTOR"
-                password = System.getenv("GITHUB_TOKEN") ?: "GITHUB_TOKEN"
+                username = System.getenv("GITHUB_ACTOR") ?: "LKachanovsky"
+                password = System.getenv("GITHUB_TOKEN") ?: System.getenv("GH_PACKAGES_TOKEN")
             }
         }
     }
